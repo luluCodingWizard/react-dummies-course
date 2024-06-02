@@ -1,0 +1,6 @@
+.heading {
+  background-image: url("../../../public/bg.jpg");
+  color: #fff;
+  padding: 50px;
+  background-size: cover;
+}
