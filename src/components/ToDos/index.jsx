@@ -1,23 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import ToDoItem from "../ToDoItem";
 import ToDoItemForm from "../ToDoItemForm";
+import useToDos from "../../hooks/useToDos";
 
 const Index = () => {
-  const [todos, setTodos] = useState([]); // hook 1
+  const { todos, setTodos, loading } = useToDos();
   const [showForm, setShowForm] = useState(false); // hook 2
 
-  // handle side effects
-  useEffect(() => {
-    // run code to handle side effect
-    const fetchToDos = async () => {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos?_page=10"
-      );
-      const myToDos = await response.json();
-      setTodos(myToDos);
-    };
-    fetchToDos();
-  }, []);
   const handleAddItem = () => {
     setShowForm(true);
   };
@@ -41,6 +30,10 @@ const Index = () => {
       )
     );
   }, []);
+  console.log(loading);
+  if (loading) {
+    return <div>loading...........</div>;
+  }
 
   return (
     <>
